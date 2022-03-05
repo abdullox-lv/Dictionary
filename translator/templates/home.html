@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Home
+{% endblock title %}
+
+{% block content %}
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'home' %}">Translator</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        </ul>
+        <form class="d-flex"> {% csrf_token %}
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<section>
+  <div class="container pb-3 pt-3">
+      <div class="row justify-content-center">
+          <div class="col-3">
+            <h2 class="text-center pb-4">Online Tarjimon</h2>
+          </div>
+          <div class="col-1 pt-2">
+            <img
+              src="https://flagcdn.com/32x24/gb.png"
+              srcset="https://flagcdn.com/64x48/gb.png 2x,
+                https://flagcdn.com/96x72/gb.png 3x"
+              width="32"
+              height="24"
+              alt="United Kingdom">
+          </div>
+          <div class="col-1 pt-2">
+            <i class="fa-solid fa-arrow-right-arrow-left"></i>
+          </div>
+          <div class="col-1 pt-2">
+            <img
+              src="https://flagcdn.com/32x24/uz.png"
+              srcset="https://flagcdn.com/64x48/uz.png 2x,
+                https://flagcdn.com/96x72/uz.png 3x"
+              width="32"
+              height="24"
+              alt="Uzbekistan">
+          </div>
+      </div>
+      <form class="" action="/" method="GET">
+        <div class="card shadow">
+          <div class="col-8 pt-5 pb-5 align-self-center">
+            <div class="input-group mb-3">
+              <input name="q" value="{{ q }}" type="text" class="form-control p-3" placeholder="Type a word" aria-label="Type a word" aria-describedby="button-addon2">
+              <button class="btn btn-outline-success" type="submit" id="button-addon2">Search</button>
+            </div>
+          </div>
+        </div>
+      </form>
+  </div>
+</section>
+<main>
+  <div class="container">
+    <div class="col-12 mb-3 shadow">
+      <div class="row justify-content-center">
+        <div class="col-10 p-5">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="text-center">
+                  <img
+                    src="https://flagcdn.com/32x24/gb.png"
+                    srcset="https://flagcdn.com/64x48/gb.png 2x,
+                      https://flagcdn.com/96x72/gb.png 3x"
+                    width="32"
+                    height="24"
+                    alt="United Kingdom">
+                    English
+                </th>
+                <th class="text-center">
+                  <img
+                    src="https://flagcdn.com/32x24/uz.png"
+                    srcset="https://flagcdn.com/64x48/uz.png 2x,
+                      https://flagcdn.com/96x72/uz.png 3x"
+                    width="32"
+                    height="24"
+                    alt="Uzbekistan">
+                    Uzbek
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td class="text-center">
+                {% if result %}
+                  {% for data in result %}
+                    <p>{{ data.english }}</p>
+                  {% endfor %}
+                {% endif %}
+              </td>
+              <td class="text-center">
+                {% if result %}
+                  {% for data in result %}
+                    <p>{{ data.uzbek }}</p>
+                  {% endfor %}
+                {% endif %}
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock content %}
+<div class="b-example-divider"></div>
+{% block footer %}
+<div class="col-12 position-absolute bg-dark bottom-0 shadow">
+  <div class="col-12">
+    <hr>
+    <p class="text-center text-light pb-2">&copy 2022 All right reserved</p>
+  </div>
+</div>
+{% endblock footer %}
